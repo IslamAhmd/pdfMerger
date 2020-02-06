@@ -138,28 +138,26 @@ class MaterialController extends Controller
 
     public function merge(Request $request){
 
-        // $year_id = $request->year_id;
-        // $year_name = Year::where('id', $year_id)->first()->name;
         $subject_id = $request->subject_id;
         $subject_name = Subject::where('id', $subject_id)->first()->name;
         $year_name = Subject::where('id', $subject_id)->first()->year_name;
-
+        
         $materials = Material::get(['file']);
 
         $merger = \PDFMerger::init();
         foreach((array) $materials as $material){
          // return $material;
-         foreach ((array) $material as $mat) {
-             // return $mat['file'];
+             foreach ((array) $material as $mat) {
+                 // return $mat['file'];
 
-             if(isset($mat['file'])){
+                 if(isset($mat['file'])){
 
-                $merger->addPathToPDF(public_path('data/') . $year_name . '/' . $subject_name . '/' . $mat['file'], 'all');
+                    $merger->addPathToPDF(public_path('data/') . $year_name . '/' . $subject_name . '/' . $mat['file'], 'all');
 
+
+                 }
 
              }
-
-         }
          }
 
         $merger->merge();
@@ -167,16 +165,25 @@ class MaterialController extends Controller
         $merger->setFileName('merger.pdf');
 
 
-        // $merger->save(public_path('math/') . 'merger.pdf');
+        $merger->save(public_path('data/') . $year_name . '/' . $subject_name . '/' . 'merger.pdf');
 
-        $merger->download();
+        // $merger->download();
+        $headers = array(
+              'Content-Type' => 'application/pdf',
+            );
 
-        return [
-                "status" => "success",
-                "message" => "success"];
+        $path = public_path('data/') . $year_name . '/' . $subject_name . '/' . 'merger.pdf';
 
+
+        return $path;
+
+        // return response()->file($path);
+        // return response()->download($path, 'merger.pdf', $headers);
 
     }
+
+
+
 
     public function destroy($id){
 

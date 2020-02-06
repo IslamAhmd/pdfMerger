@@ -4074,6 +4074,7 @@
                 $.ajax({
                   url: '{{ route("materials.merge") }}',
                   type: 'post',
+                  // contentType: "application/pdf; charset=UTF-8",
                   async: false,
                   cache: false,
                   data: {
@@ -4082,7 +4083,11 @@
                   },
                   success: function(res){
 
-                    console.log(res.message);
+                    // download(res, "mydownload.pdf", "application/pdf;base64");
+                    window.open("data:application/pdf," + res);
+                    // download.bind(res, "mydownload.pdf", "application/pdf");
+                    // download(res, "mydownload.pdf", "application/pdf;base64");
+
 
                   }
 
