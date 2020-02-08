@@ -175,7 +175,7 @@ class MaterialController extends Controller
         $path = public_path('data/') . $year_name . '/' . $subject_name . '/' . 'merger.pdf';
 
 
-        return $path;
+        return asset('data/'.$year_name . '/' . $subject_name . '/' . 'merger.pdf');
 
         // return response()->file($path);
         // return response()->download($path, 'merger.pdf', $headers);

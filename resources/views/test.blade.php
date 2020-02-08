@@ -4045,17 +4045,20 @@
                         $.get('{{ route("subjects.index") }}', function(result){
 
                             result.forEach(function(subject, i){
-
-                                if(yearsArr[k].attr("href") == subjectsArr[i].attr("value") && year.id == subject.year_id){
+//year.id == subject.year_id
+                                if(yearsArr[k].attr("href") == subjectsArr[i].attr("value")){
 
                                         subjectsArr[i].text(subject.display_name);
-
                                         subjectsData[i].attr("data-id", subject.id);
 
 
                                     }
 
                             })
+
+                            // year.subjects.forEach(function(subject, n){
+
+                            // })
 
                         })               
 
@@ -4082,9 +4085,11 @@
                     '_token': token
                   },
                   success: function(res){
-
+                    console.log(res);
                     // download(res, "mydownload.pdf", "application/pdf;base64");
-                    window.open("data:application/pdf," + res);
+                    setTimeout(function () { 
+                    window.open(res);
+                }, 2000);
                     // download.bind(res, "mydownload.pdf", "application/pdf");
                     // download(res, "mydownload.pdf", "application/pdf;base64");
 
@@ -4099,24 +4104,24 @@
 
 
 
-            $('#228').change(function(){
-                if(this.checked) {
+            // $('#228').change(function(){
+            //     if(this.checked) {
                     
-                    $.get('{{ route("materials.merge") }}', function(res){
+            //         $.get('{{ route("materials.merge") }}', function(res){
 
-                        console.log(res);
-                        // window.open(res);
-                         window.location(res);
-                         // window.open(res, 'download_window', 'toolbar=0,location=no,directories=0,status=0,scrollbars=0,resizeable=0,width=1,height=1,top=0,left=0');
-                         // window.focus();
+            //             console.log(res);
+            //             // window.open(res);
+            //              window.location(res);
+            //              // window.open(res, 'download_window', 'toolbar=0,location=no,directories=0,status=0,scrollbars=0,resizeable=0,width=1,height=1,top=0,left=0');
+            //              // window.focus();
 
-                         // location.assign(res, 'download');
+            //              // location.assign(res, 'download');
 
 
-                    })
+            //         })
 
-                }
-            })
+            //     }
+            // })
 
                             // res.forEach(function(year, i){
 
